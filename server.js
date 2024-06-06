@@ -4,13 +4,14 @@ const articleRouter = require("./routes/articles");
 const app = express();
 
 mongoose.connect('mongodb://localhost/blog', {
-  useNewURLParser: true
+  useNewURLParser: true, useUnifiedTopology: true
 
 })
 
 app.set("view engine", "ejs");
 
 app.use("/articles", articleRouter);
+app.use(express.urlencoded({ extended: false }))
 
 app.get("/", (req, res) => {
   const articles = [
